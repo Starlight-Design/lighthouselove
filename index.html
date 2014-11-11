@@ -1,0 +1,89 @@
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <style>
+
+  body {
+    margin:0;
+  }  
+
+  header {
+    background-color:skyblue;
+    text-align: center;
+    width:100%;
+    height:50px;
+  }
+
+  h1 {
+    display: inline-block;
+    margin:0 auto;
+    width:500px;
+    line-height:50px;
+    font-family: Avenir;
+    color:white;
+  }
+
+  h4 {
+    margin:0;
+    display:inline-block;
+    font-family: Avenir;
+    color:white;
+    line-height:50px;
+  }
+
+  #tag {
+    float:left;
+    width:200px;
+  }
+
+  #hash {
+    float:right;
+    width:200px;
+  }
+
+  .lighthouse {
+    margin:0;
+    padding:0;
+  }
+
+  .lighthouse li {
+    list-style-type: none;
+    position:relative;
+    display:inline-block;
+    width:20%;
+  }
+
+  </style>
+</head>
+
+
+<body>
+<header>
+<h1>Lighthouse Love</h1>
+<h4 id="tag"><em>We Love Lighthouses!</em></h4>
+<h4 id="hash">#lighthouse</h4>
+</header>
+
+<ul class="lighthouse">
+  
+</ul>
+</body>
+
+
+<script>
+
+$(function(){
+  $.ajax({
+      type: "GET",
+      dataType: "jsonp",
+      cache: false,
+      url: "https://api.instagram.com/v1/tags/lighthouse/media/recent?access_token=1552448628.77ef0b3.e96730e9aed8426cb2ef33b615c77abb",
+      success: function(data) {
+        for (var i = 0; i < 20; i++) {
+          $(".lighthouse").append("<li><div class='overlay'></div><a target='_self' href='" + data.data[i].link + "'><img src='" + data.data[i].images.low_resolution.url + "'></img></a></li>");
+        }
+      }
+  });
+});
+
+</script>
